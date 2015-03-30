@@ -11,7 +11,10 @@
 		2A97BF8D1AC71ED600646516 /* Array2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A97BF8C1AC71ED600646516 /* Array2D.swift */; };
 		2A97BF8F1AC7213400646516 /* RandomExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A97BF8E1AC7213400646516 /* RandomExtensions.swift */; };
 		2A97BF941AC7224D00646516 /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A97BF931AC7224D00646516 /* Stopwatch.swift */; };
-		2A97BF961AC7886E00646516 /* RectFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A97BF951AC7886E00646516 /* RectFactory.swift */; };
+		2A97BF961AC7886E00646516 /* ShapeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A97BF951AC7886E00646516 /* ShapeFactory.swift */; };
+		FB0352251AC9A9A000774015 /* ARFFFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0352241AC9A9A000774015 /* ARFFFactory.swift */; };
+		FB0352271AC9AB0700774015 /* FileStringIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0352261AC9AB0700774015 /* FileStringIO.swift */; };
+		FB0352291AC9AD1800774015 /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0352281AC9AD1800774015 /* Dataset.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,7 +35,10 @@
 		2A97BF8C1AC71ED600646516 /* Array2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array2D.swift; sourceTree = "<group>"; };
 		2A97BF8E1AC7213400646516 /* RandomExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomExtensions.swift; sourceTree = "<group>"; };
 		2A97BF931AC7224D00646516 /* Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
-		2A97BF951AC7886E00646516 /* RectFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectFactory.swift; sourceTree = "<group>"; };
+		2A97BF951AC7886E00646516 /* ShapeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeFactory.swift; sourceTree = "<group>"; };
+		FB0352241AC9A9A000774015 /* ARFFFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARFFFactory.swift; sourceTree = "<group>"; };
+		FB0352261AC9AB0700774015 /* FileStringIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileStringIO.swift; sourceTree = "<group>"; };
+		FB0352281AC9AD1800774015 /* Dataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dataset.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +72,10 @@
 			isa = PBXGroup;
 			children = (
 				2A97BF851AC71E4500646516 /* main.swift */,
-				2A97BF951AC7886E00646516 /* RectFactory.swift */,
+				FB0352241AC9A9A000774015 /* ARFFFactory.swift */,
+				FB0352281AC9AD1800774015 /* Dataset.swift */,
+				FB0352261AC9AB0700774015 /* FileStringIO.swift */,
+				2A97BF951AC7886E00646516 /* ShapeFactory.swift */,
 				2A97BF8C1AC71ED600646516 /* Array2D.swift */,
 				2A97BF901AC7214E00646516 /* Extensions */,
 			);
@@ -139,9 +148,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A97BF861AC71E4500646516 /* main.swift in Sources */,
-				2A97BF961AC7886E00646516 /* RectFactory.swift in Sources */,
+				FB0352271AC9AB0700774015 /* FileStringIO.swift in Sources */,
+				FB0352251AC9A9A000774015 /* ARFFFactory.swift in Sources */,
+				2A97BF961AC7886E00646516 /* ShapeFactory.swift in Sources */,
 				2A97BF8D1AC71ED600646516 /* Array2D.swift in Sources */,
 				2A97BF8F1AC7213400646516 /* RandomExtensions.swift in Sources */,
+				FB0352291AC9AD1800774015 /* Dataset.swift in Sources */,
 				2A97BF941AC7224D00646516 /* Stopwatch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,7 +194,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -218,7 +230,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};
@@ -257,6 +269,7 @@
 				2A97BF8B1AC71E4500646516 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

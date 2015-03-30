@@ -10,8 +10,11 @@ import Foundation
 
 println("Hello, World!")
 
-let square = Array2D(rows:10, cols:10, filler:false)
+let shapeData = Dataset<Bool,String>(features:100, outputs:1))
 
-// Fill it with a square manually
-
+for _ in 0..<500
+{
+    shapeData.addInstance(randomSquare().toVector(), outputVector:["square"])
+    shapeData.addInstance(randomCircle().toVector(), outputVector:["circle"])
+}
 
