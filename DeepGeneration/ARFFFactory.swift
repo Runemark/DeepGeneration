@@ -36,9 +36,70 @@ func datasetToString(dataset:Dataset<Bool,String>) -> String
                 instanceString += "0,"
             }
         }
+        
+        // WARXING: ASSUMES ONLY 1 TARGET PER INSTANCE
+        instanceString += "\(instance.targets[0])\n"
+        arffString += instanceString
     }
     
     return arffString
+}
+
+func datasetFromString(dataString:String)
+{
+    var dataset = Dataset<Bool,String>()
+    
+    var featureCount = 0
+    
+    // WARXING: ASSUMES ONLY 1 TARGET PER INSTANCE
+    var outputCount = 1
+    
+    var dataSection = false
+    
+    for line in dataString.componentsSeparatedByString("\n")
+    {
+        if line.rangeOfString("@ATTRIBUTE") != nil
+        {
+            if line.rangeOfString("class") != nil
+            {
+                // deal with class string
+                // we can actually ignore this for now
+            }
+            else
+            {
+                featureCount++
+            }
+        }
+        else if line.rangeOfString("@DATA")
+        {
+            // Data Section Begun
+            dataSection = true
+        }
+        else if (dataSection)
+        {
+            // This is an instance
+            var features = [Bool]()
+            
+            let components = line.componentsSeparatedByString(",")
+            for componentIndex in 0..<components.count-1
+            {
+                let value = components[0].toInt()!
+                if (value == 0)
+                {
+                    features.append(false)
+                }
+                else
+                {
+                    features.append(true)
+                }
+            }
+            
+            let classification = components[components.count-1]
+            
+            
+            dataset.addInstance(features, outputVector:[classification])
+        }
+    }
 }
 
 func imageToDataInstance(image:Array2D<Bool>, classification:String) -> String
@@ -57,35 +118,3 @@ func imageToDataInstance(image:Array2D<Bool>, classification:String) -> String
     
     return dataInstanceString
 }
-
-//func exportArffFile(dataset:Dataset) -> String
-//{
-//    var exportString = "@RELATION DATA=train-images.idx3-ubyte-LABELS=train-labels.idx1-ubyte\n\n"
-//    
-//    for attributeIndex in 1...dataset.getInstance(0).features.count
-//    {
-//        exportString += "@ATTRIBUTE f\(attributeIndex)  real\n"
-//    }
-//    
-//    exportString += "@ATTRIBUTE class {0,1,2,3,4,5,6,7,8,9}\n\n"
-//    exportString += "@DATA\n"
-//    
-//    for instanceIndex in 0..<dataset.instanceCount
-//    {
-//        let instance = dataset.getInstance(instanceIndex)
-//        var instanceString = ""
-//        for featureIndex in 0..<instance.features.count
-//        {
-//            let normalizedFeature = instance.features[featureIndex]
-//            let unnormalizedFeature = Int(floor(normalizedFeature*255))
-//            instanceString += "\(unnormalizedFeature),"
-//        }
-//        
-//        let outputClass = Int(dataset.outputs[instanceIndex][0])
-//        
-//        instanceString += "\(outputClass)\n"
-//        exportString += instanceString
-//    }
-//    
-//    return exportString
-//}

@@ -10,11 +10,19 @@ import Foundation
 
 println("Hello, World!")
 
-let shapeData = Dataset<Bool,String>(features:100, outputs:1))
+let fileio = FileStringIO(root:"\(NSHomeDirectory())/Desktop/DeepGeneration/Data/")
 
-for _ in 0..<500
-{
-    shapeData.addInstance(randomSquare().toVector(), outputVector:["square"])
-    shapeData.addInstance(randomCircle().toVector(), outputVector:["circle"])
-}
+//let shapeData = Dataset<Bool,String>(features:100, outputs:1)
+//
+//for _ in 0..<500
+//{
+//    shapeData.addInstance(randomSquare().toVector(), outputVector:["square"])
+//    shapeData.addInstance(randomCircle().toVector(), outputVector:["circle"])
+//}
+//
+//let shapeDataString = datasetToString(shapeData)
+//fileio.writeStringToFile("shape", ext:"arff", contents:shapeDataString)
 
+let shapeDataString = fileio.stringFromFile("shape", ext:"arff")
+
+println("derp")

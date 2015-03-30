@@ -15,6 +15,7 @@
 		FB0352251AC9A9A000774015 /* ARFFFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0352241AC9A9A000774015 /* ARFFFactory.swift */; };
 		FB0352271AC9AB0700774015 /* FileStringIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0352261AC9AB0700774015 /* FileStringIO.swift */; };
 		FB0352291AC9AD1800774015 /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0352281AC9AD1800774015 /* Dataset.swift */; };
+		FB0352331AC9BB3700774015 /* SingleLayerBackpropNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0352321AC9BB3700774015 /* SingleLayerBackpropNet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,6 +40,7 @@
 		FB0352241AC9A9A000774015 /* ARFFFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARFFFactory.swift; sourceTree = "<group>"; };
 		FB0352261AC9AB0700774015 /* FileStringIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileStringIO.swift; sourceTree = "<group>"; };
 		FB0352281AC9AD1800774015 /* Dataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dataset.swift; sourceTree = "<group>"; };
+		FB0352321AC9BB3700774015 /* SingleLayerBackpropNet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleLayerBackpropNet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,11 +74,10 @@
 			isa = PBXGroup;
 			children = (
 				2A97BF851AC71E4500646516 /* main.swift */,
-				FB0352241AC9A9A000774015 /* ARFFFactory.swift */,
-				FB0352281AC9AD1800774015 /* Dataset.swift */,
-				FB0352261AC9AB0700774015 /* FileStringIO.swift */,
-				2A97BF951AC7886E00646516 /* ShapeFactory.swift */,
-				2A97BF8C1AC71ED600646516 /* Array2D.swift */,
+				FB03522F1AC9BB1F00774015 /* Learning */,
+				FB03522C1AC9BB0600774015 /* Shapes */,
+				FB03522B1AC9BAF700774015 /* DataStructures */,
+				FB03522A1AC9BAD300774015 /* DataFormat */,
 				2A97BF901AC7214E00646516 /* Extensions */,
 			);
 			path = DeepGeneration;
@@ -89,6 +90,40 @@
 				2A97BF931AC7224D00646516 /* Stopwatch.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		FB03522A1AC9BAD300774015 /* DataFormat */ = {
+			isa = PBXGroup;
+			children = (
+				FB0352281AC9AD1800774015 /* Dataset.swift */,
+				FB0352241AC9A9A000774015 /* ARFFFactory.swift */,
+				FB0352261AC9AB0700774015 /* FileStringIO.swift */,
+			);
+			name = DataFormat;
+			sourceTree = "<group>";
+		};
+		FB03522B1AC9BAF700774015 /* DataStructures */ = {
+			isa = PBXGroup;
+			children = (
+				2A97BF8C1AC71ED600646516 /* Array2D.swift */,
+			);
+			name = DataStructures;
+			sourceTree = "<group>";
+		};
+		FB03522C1AC9BB0600774015 /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				2A97BF951AC7886E00646516 /* ShapeFactory.swift */,
+			);
+			name = Shapes;
+			sourceTree = "<group>";
+		};
+		FB03522F1AC9BB1F00774015 /* Learning */ = {
+			isa = PBXGroup;
+			children = (
+				FB0352321AC9BB3700774015 /* SingleLayerBackpropNet.swift */,
+			);
+			name = Learning;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,6 +187,7 @@
 				FB0352251AC9A9A000774015 /* ARFFFactory.swift in Sources */,
 				2A97BF961AC7886E00646516 /* ShapeFactory.swift in Sources */,
 				2A97BF8D1AC71ED600646516 /* Array2D.swift in Sources */,
+				FB0352331AC9BB3700774015 /* SingleLayerBackpropNet.swift in Sources */,
 				2A97BF8F1AC7213400646516 /* RandomExtensions.swift in Sources */,
 				FB0352291AC9AD1800774015 /* Dataset.swift in Sources */,
 				2A97BF941AC7224D00646516 /* Stopwatch.swift in Sources */,

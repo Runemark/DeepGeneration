@@ -106,8 +106,6 @@ func rectWithCorners(nw:coord, sw:coord, se:coord, ne:coord) -> Array2D<Bool>
         squareImage[nw.x,y] = true
     }
     
-    println("derp")
-    
     return squareImage
 }
 
