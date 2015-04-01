@@ -14,6 +14,24 @@ struct coord
     var y:Int
 }
 
+func imageToFloatGrid(image:Array2D<Bool>) -> Array2D<Float>
+{
+    var floatGrid = Array2D<Float>(rows:10, cols:10, filler:Float(0.0))
+    
+    for x in 0..<10
+    {
+        for y in 0..<10
+        {
+            if (image[x,y])
+            {
+                floatGrid[x,y] = Float(1.0)
+            }
+        }
+    }
+    
+    return floatGrid
+}
+
 func circleWithCenter(c:coord, r:Int) -> Array2D<Bool>
 {
     var circleImage = Array2D<Bool>(rows:10, cols:10, filler:false)
@@ -66,8 +84,8 @@ func circleWithCenter(c:coord, r:Int) -> Array2D<Bool>
 func randomCircle() -> Array2D<Bool>
 {
     // Select a random valid center (WARXING: assuming a 10x10 space, must fall betweeen 1 and 8 inclusive in both x and y direction)
-    let randX = randIntBetween(1, 8)
-    let randY = randIntBetween(1, 8)
+    let randX = randIntBetween(3, 6)
+    let randY = randIntBetween(3, 6)
     let randCenter = coord(x:randX, y:randY)
     
     // Based on the centerpoint, generate the random radius
@@ -135,12 +153,16 @@ func squareWithCenter(c:coord, r:Int) -> Array2D<Bool>
 func randomSquare() -> Array2D<Bool>
 {
     // Select a random valid center (WARXING: assuming a 10x10 space, must fall betweeen 1 and 8 inclusive in both x and y direction)
-    let randX = randIntBetween(1, 8)
-    let randY = randIntBetween(1, 8)
+    let randX = randIntBetween(3, 6)
+    let randY = randIntBetween(3, 6)
     let randCenter = coord(x:randX, y:randY)
     
     // Based on the centerpoint, generate the random radius
-    let minDist = minDistanceToEdge(randCenter)
+    var minDist = minDistanceToEdge(randCenter)
+    if (minDist > 1)
+    {
+        minDist = minDist - 1
+    }
     let randRadius = randIntBetween(1, minDist)
     
     return squareWithCenter(randCenter, randRadius)

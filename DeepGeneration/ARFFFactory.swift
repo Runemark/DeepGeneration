@@ -8,16 +8,16 @@
 
 import Foundation
 
-func datasetToString(dataset:Dataset<Bool,String>) -> String
+func datasetToString(dataset:Dataset<Float,Float>) -> String
 {
     var arffString = "@RELATION circlevssquare"
     
     for attributeIndex in 0..<dataset.featureCount
     {
-        arffString += "@ATTRIBUTE pixel\(attributeIndex) real\n"
+        arffString += "@ATTRIBUTE p\(attributeIndex) real\n"
     }
     
-    arffString += "@ATTRIBUTE class {circle, square}\n\n"
+    arffString += "@ATTRIBUTE class real (square = 0.0ish, circle = 1.0ish)\n\n"
     arffString += "@DATA\n"
     
     for instanceIndex in 0..<dataset.instanceCount
@@ -27,14 +27,7 @@ func datasetToString(dataset:Dataset<Bool,String>) -> String
         for featureIndex in 0..<instance.features.count
         {
             let value = instance.features[featureIndex]
-            if (value)
-            {
-                instanceString += "1,"
-            }
-            else
-            {
-                instanceString += "0,"
-            }
+            instanceString += "\(value),"
         }
         
         // WARXING: ASSUMES ONLY 1 TARGET PER INSTANCE
@@ -45,9 +38,53 @@ func datasetToString(dataset:Dataset<Bool,String>) -> String
     return arffString
 }
 
-func datasetFromString(dataString:String)
+func transformDataSet(dataset:Dataset<Float,Float>, network:TransformLayer) -> Dataset<Float,Float>
 {
-    var dataset = Dataset<Bool,String>()
+    return Dataset<Float,Float>()
+}
+
+func autoencodeDataset(dataset:Dataset<Float,Float>, denoise:Bool, denoisePercent:Float) -> Dataset<Float,Float>
+{
+    let autoencodedDataset = Dataset<Float,Float>()
+    
+    for instanceIndex in 0..<dataset.instanceCount
+    {
+        let instance = dataset.getInstance(instanceIndex)
+        let features = instance.features
+        var newFeatures = [Float]()
+        
+        if (denoise)
+        {
+            for featureIndex in 0..<features.count
+            {
+                let feature = features[featureIndex]
+                if (randNormalFloat() > denoisePercent)
+                {
+                    newFeatures.append(Float(0.0))
+                }
+                else
+                {
+                    newFeatures.append(feature)
+                }
+            }
+        }
+        
+        if (denoise)
+        {
+            autoencodedDataset.addInstance(newFeatures, outputVector:instance.features)
+        }
+        else
+        {
+            autoencodedDataset.addInstance(instance.features, outputVector:instance.features)
+        }
+    }
+    
+    return autoencodedDataset
+}
+
+func datasetFromString(dataString:String) -> Dataset<Float,Float>
+{
+    var dataset = Dataset<Float,Float>()
     
     var featureCount = 0
     
@@ -70,36 +107,29 @@ func datasetFromString(dataString:String)
                 featureCount++
             }
         }
-        else if line.rangeOfString("@DATA")
+        else if line.rangeOfString("@DATA") != nil
         {
             // Data Section Begun
             dataSection = true
         }
-        else if (dataSection)
+        else if (dataSection && countElements(line) > 0)
         {
             // This is an instance
-            var features = [Bool]()
+            var features = [Float]()
             
             let components = line.componentsSeparatedByString(",")
             for componentIndex in 0..<components.count-1
             {
-                let value = components[0].toInt()!
-                if (value == 0)
-                {
-                    features.append(false)
-                }
-                else
-                {
-                    features.append(true)
-                }
+                let value = components[componentIndex].floatValue
+                features.append(value)
             }
             
-            let classification = components[components.count-1]
-            
-            
+            let classification = components[components.count-1].floatValue
             dataset.addInstance(features, outputVector:[classification])
         }
     }
+    
+    return dataset
 }
 
 func imageToDataInstance(image:Array2D<Bool>, classification:String) -> String

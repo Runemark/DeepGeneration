@@ -30,7 +30,7 @@ class SingleLayerBackpropNet
     var hiddenCount:Int
     var outputCount:Int
     
-    var learningRate:Float = 0.25
+    var learningRate:Float = 0.1
     
     init(inputNodes:Int, hiddenNodes:Int, outputNodes:Int)
     {
@@ -57,60 +57,53 @@ class SingleLayerBackpropNet
     // Testing
     //////////////////////////////////////////////////////////////////////////////////////////
     
-//    func classificationAccuracy(dataset:Dataset) -> Float
-//    {
-//        let totalInstances = dataset.instanceCount
-//        var correctlyClassifiedInstances = 0
-//        // Return classification accuracy
-//        for index in 0..<totalInstances
-//        {
+    func classificationAccuracy(dataset:Dataset<Float,Float>) -> Float
+    {
+        let totalInstances = dataset.instanceCount
+        var correctlyClassifiedInstances = 0
+        // Return classification accuracy
+        for index in 0..<totalInstances
+        {
 //            println("testing on instance: \(index)")
-//            let instance = dataset.getInstance(index)
-//            let output = classificationForInstance(instance.features)
-//            let target = targetClassification(instance.targets)
-//            
-//            if (output == target)
-//            {
-//                correctlyClassifiedInstances++
-//            }
-//        }
-//        
-//        return Float(correctlyClassifiedInstances)/Float(totalInstances)
-//    }
+            let instance = dataset.getInstance(index)
+            let output = classificationForInstance(instance.features)
+            let target = targetClassification(instance.targets)
+            
+            if (target == output)
+            {
+                correctlyClassifiedInstances++
+            }
+        }
+        
+        return Float(correctlyClassifiedInstances)/Float(totalInstances)
+    }
     
     // This method is psecific to the MNIST task
     func classificationForInstance(features:[Float]) -> Int
     {
         calculateActivationsForInstance(features)
         
-        // Find the output node with the highest activation
-        var maxActivation:Float = -1.0
-        var indexWithHighestActivation:Int = -1;
-        for (outputIndex:Int, activation:Float) in enumerate(outputActivations)
+        if (outputActivations[0] > 0.5)
         {
-            if activation > maxActivation
-            {
-                maxActivation = activation
-                indexWithHighestActivation = outputIndex
-            }
+            return 1
         }
-        
-        return indexWithHighestActivation
+        else
+        {
+            return 0
+        }
     }
     
     // This method is specific to the MNIST task
     func targetClassification(targetVector:[Float]) -> Int
     {
-        var classificationIndex = -1;
-        for (index:Int, target:Float) in enumerate(targetVector)
+        if (targetVector[0] == 1.0)
         {
-            if (target == 1.0)
-            {
-                classificationIndex = index
-            }
+            return 1
         }
-        
-        return classificationIndex
+        else
+        {
+            return 0
+        }
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////
@@ -163,7 +156,7 @@ class SingleLayerBackpropNet
     // Training
     //////////////////////////////////////////////////////////////////////////////////////////
     
-    func trainOnDataset(trainSet:Dataset<Bool,String>, maxEpochs:Int, maxInstances:Int)
+    func trainOnDataset(trainSet:Dataset<Float,Float>, maxEpochs:Int, maxInstances:Int)
     {
         var instanceLimit = maxInstances
         if (maxInstances < 1 || maxInstances > trainSet.instanceCount)
@@ -175,80 +168,73 @@ class SingleLayerBackpropNet
         {
             for index in 0..<instanceLimit
             {
-                println("training on instance: \(index)")
-//                trainOnInstance(trainSet.getInstance(index))
+//                println("training on instance: \(index)")
+                trainOnInstance(trainSet.getInstance(index))
             }
         }
     }
     
-//    func learningOverTime(trainSet:Dataset<Bool,String>, epochs:Int, testSet:Dataset) -> [Float]
-//    {
-//        var errors = [Float]()
-//        
-//        for epochIndex in 0..<epochs
-//        {
-//            for index in 0..<trainSet.instanceCount
-//            {
-//                trainOnInstance(trainSet.getInstance(index))
-//                if (index % 200 == 0)
-//                {
-//                    errors.append(testOnDataset(testSet))
-//                }
-//            }
-//        }
-//        
-//        return errors
-//    }
-    
-//    func testOnDataset(testSet:Dataset<Bool,String>) -> Float
-//    {
-//        var summedError:Float = 0.0
-//        
-//        for index in 0..<testSet.instanceCount
-//        {
-//            calculateActivationsForInstance(testSet.getInstance(index).features)
-//            let sse = SSEForTargets(testSet.getInstance(index).targets)
-//            println("APE \(index): \(sse)")
-//            summedError += sse
-//        }
-//        
-//        let result = summedError/Float(testSet.instanceCount)
-//        print("GRAND APE: \(result)")
-//        return result
-//    }
-//    
-//    func SSEForTargets(targets:[Float]) -> Float
-//    {
-//        var error:Float = 0.0
-//        
-//        for targetIndex in 0..<targets.count
-//        {
-//            error += pow((targets[targetIndex] - outputActivations[targetIndex]), Float(2.0))
-//        }
-//        
-//        return error
-//    }
-    
-//    func trainOnDataset(trainSet:Dataset<Bool,String>, testSet:Dataset<Bool,String>, maxEpochs:Int, maxInstances:Int)
-//    {
-//        var instanceLimit = maxInstances
-//        if (maxInstances < 1 || maxInstances > trainSet.instanceCount)
-//        {
-//            instanceLimit = trainSet.instanceCount
-//        }
-//        
-//        for epoch in 0..<maxEpochs
-//        {
-//            
-//            for index in 0..<instanceLimit
-//            {
+    func trainAndTestOnDataset(trainSet:Dataset<Float,Float>, testSet:Dataset<Float,Float>, maxEpochs:Int, maxInstances:Int, sse:Bool)
+    {
+        var instanceLimit = maxInstances
+        if (maxInstances < 1 || maxInstances > trainSet.instanceCount)
+        {
+            instanceLimit = trainSet.instanceCount
+        }
+        
+        for epoch in 0..<maxEpochs
+        {
+            for index in 0..<instanceLimit
+            {
 //                println("training on instance: \(index)")
-//                trainOnInstance(trainSet.getInstance(index))
-//            }
-//            //            println("epoch SSE: \(testOnDataset(testSet))")
-////            println("epoch CA: \(classificationAccuracy(testSet))")
-//        }
-//    }
+                trainOnInstance(trainSet.getInstance(index))
+            }
+            
+            if (sse)
+            {
+                println("epoch \(epoch): \(testSSEOnDataset(testSet))")
+            }
+            else
+            {
+                println("epoch: \(epoch): \(testACCOnDataset(testSet))")
+            }
+            
+        }
+    }
+    
+    func testACCOnDataset(testSet:Dataset<Float,Float>) -> Float
+    {
+        return classificationAccuracy(testSet)
+    }
+    
+    func testSSEOnDataset(testSet:Dataset<Float,Float>) -> Float
+    {
+        var summedError:Float = 0.0
+        
+        for index in 0..<testSet.instanceCount
+        {
+            calculateActivationsForInstance(testSet.getInstance(index).features)
+            let sse = SSEForTargets(testSet.getInstance(index).targets)
+//            println("APE \(index): \(sse)")
+            summedError += sse
+        }
+        
+        let result = summedError/Float(testSet.instanceCount)
+        print("GRAND APE: \(result)")
+        return result
+    }
+
+    func SSEForTargets(targets:[Float]) -> Float
+    {
+        var error:Float = 0.0
+        
+        for targetIndex in 0..<targets.count
+        {
+            error += pow((targets[targetIndex] - outputActivations[targetIndex]), Float(2.0))
+        }
+        
+        return error
+    }
     
     func trainOnInstance(instance:(features:[Float],targets:[Float]))
     {

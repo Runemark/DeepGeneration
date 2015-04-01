@@ -12,6 +12,9 @@
 		2A97BF8F1AC7213400646516 /* RandomExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A97BF8E1AC7213400646516 /* RandomExtensions.swift */; };
 		2A97BF941AC7224D00646516 /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A97BF931AC7224D00646516 /* Stopwatch.swift */; };
 		2A97BF961AC7886E00646516 /* ShapeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A97BF951AC7886E00646516 /* ShapeFactory.swift */; };
+		2AA8AAEE1ACAF45E004A7889 /* NetworkIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA8AAED1ACAF45E004A7889 /* NetworkIO.swift */; };
+		2AA8AAF01ACBAFF9004A7889 /* TransformLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA8AAEF1ACBAFF9004A7889 /* TransformLayer.swift */; };
+		2AFF50D51ACA647C00C1E765 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFF50D41ACA647C00C1E765 /* StringExtensions.swift */; };
 		FB0352251AC9A9A000774015 /* ARFFFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0352241AC9A9A000774015 /* ARFFFactory.swift */; };
 		FB0352271AC9AB0700774015 /* FileStringIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0352261AC9AB0700774015 /* FileStringIO.swift */; };
 		FB0352291AC9AD1800774015 /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0352281AC9AD1800774015 /* Dataset.swift */; };
@@ -37,6 +40,9 @@
 		2A97BF8E1AC7213400646516 /* RandomExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomExtensions.swift; sourceTree = "<group>"; };
 		2A97BF931AC7224D00646516 /* Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
 		2A97BF951AC7886E00646516 /* ShapeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeFactory.swift; sourceTree = "<group>"; };
+		2AA8AAED1ACAF45E004A7889 /* NetworkIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkIO.swift; sourceTree = "<group>"; };
+		2AA8AAEF1ACBAFF9004A7889 /* TransformLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformLayer.swift; sourceTree = "<group>"; };
+		2AFF50D41ACA647C00C1E765 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		FB0352241AC9A9A000774015 /* ARFFFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARFFFactory.swift; sourceTree = "<group>"; };
 		FB0352261AC9AB0700774015 /* FileStringIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileStringIO.swift; sourceTree = "<group>"; };
 		FB0352281AC9AD1800774015 /* Dataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dataset.swift; sourceTree = "<group>"; };
@@ -88,6 +94,7 @@
 			children = (
 				2A97BF8E1AC7213400646516 /* RandomExtensions.swift */,
 				2A97BF931AC7224D00646516 /* Stopwatch.swift */,
+				2AFF50D41ACA647C00C1E765 /* StringExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -98,6 +105,7 @@
 				FB0352281AC9AD1800774015 /* Dataset.swift */,
 				FB0352241AC9A9A000774015 /* ARFFFactory.swift */,
 				FB0352261AC9AB0700774015 /* FileStringIO.swift */,
+				2AA8AAED1ACAF45E004A7889 /* NetworkIO.swift */,
 			);
 			name = DataFormat;
 			sourceTree = "<group>";
@@ -122,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				FB0352321AC9BB3700774015 /* SingleLayerBackpropNet.swift */,
+				2AA8AAEF1ACBAFF9004A7889 /* TransformLayer.swift */,
 			);
 			name = Learning;
 			sourceTree = "<group>";
@@ -183,11 +192,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A97BF861AC71E4500646516 /* main.swift in Sources */,
+				2AA8AAEE1ACAF45E004A7889 /* NetworkIO.swift in Sources */,
 				FB0352271AC9AB0700774015 /* FileStringIO.swift in Sources */,
+				2AFF50D51ACA647C00C1E765 /* StringExtensions.swift in Sources */,
 				FB0352251AC9A9A000774015 /* ARFFFactory.swift in Sources */,
 				2A97BF961AC7886E00646516 /* ShapeFactory.swift in Sources */,
 				2A97BF8D1AC71ED600646516 /* Array2D.swift in Sources */,
 				FB0352331AC9BB3700774015 /* SingleLayerBackpropNet.swift in Sources */,
+				2AA8AAF01ACBAFF9004A7889 /* TransformLayer.swift in Sources */,
 				2A97BF8F1AC7213400646516 /* RandomExtensions.swift in Sources */,
 				FB0352291AC9AD1800774015 /* Dataset.swift in Sources */,
 				2A97BF941AC7224D00646516 /* Stopwatch.swift in Sources */,

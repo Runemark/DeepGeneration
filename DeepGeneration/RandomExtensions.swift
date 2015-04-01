@@ -11,7 +11,7 @@ import Foundation
 // Returns a random bool with 50% probability of getting true, 50% probability of getting false
 func coinFlip() -> Bool
 {
-    let coinFlip = Int(arc4random_uniform(1)+1)
+    let coinFlip = randIntBetween(0, 1)
     if (coinFlip > 0)
     {
         return true
@@ -41,29 +41,29 @@ func randIntBetween(start:Int, stop:Int) -> Int
     let mini = UInt32(start + offset)
     let maxi = UInt32(stop + offset)
     
-    return Int(mini + arc4random_uniform(maxi - mini)) - offset
+    return Int(mini + arc4random_uniform(maxi + 1 - mini)) - offset
 }
 
-// Returns a random float between the specified ranges (inclusive)
-func randFloatBetween()
-{
-    // TODO
-}
+//// Returns a random float between the specified ranges (inclusive)
+//func randFloatBetween()
+//{
+//    // TODO
+//}
 
-// Returns a random double between the specified ranges (inclusive)
-func randDoubleBetween()
-{
-    // TODO
-}
+//// Returns a random double between the specified ranges (inclusive)
+//func randDoubleBetween()
+//{
+//    // TODO
+//}
 
 // Returns a random float between 0 and 1
-func randNormalFloat()
+func randNormalFloat() -> Float
 {
-    // TODO
+    return Float(arc4random()) / Float(UINT32_MAX)
 }
 
-// Returns a random double between 0 and 1
-func randNormalDouble()
-{
-    // TODO
-}
+//// Returns a random double between 0 and 1
+//func randNormalDouble()
+//{
+//    // TODO
+//}
