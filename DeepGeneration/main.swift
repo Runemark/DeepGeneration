@@ -8,12 +8,13 @@
 
 import Foundation
 
-println("Hello, World!")
+
 
 let networkio = NetworkIO()
-
 let fileio = FileStringIO(root:"\(NSHomeDirectory())/Documents/Research/Masters/Projects/DeepGeneration/Data/")
 
+
+print("INFO: using directory",fileio.root)
 ///////////////////////////////////////////////////////
 // A_TRAIN
 // A_TEST
@@ -61,7 +62,7 @@ let fileio = FileStringIO(root:"\(NSHomeDirectory())/Documents/Research/Masters/
 ///////////////////////////////////////////////////////
 // MLP-1
 ///////////////////////////////////////////////////////
-println("\n\n\nMLP-1\n\n\n")
+print("\n\n\nMLP-1\n\n\n")
 
 let a_train_import_for_mlp_string = fileio.stringFromFile("A_Train", ext:"arff")!
 let a_train_import_for_mlp = datasetFromString(a_train_import_for_mlp_string)
@@ -80,17 +81,17 @@ fileio.writeStringToFile("MLP_1", ext:"txt", contents:mlp_1_string_export)
 ///////////////////////////////////////////////////////
 // AE-1
 ///////////////////////////////////////////////////////
-println("\n\n\nAE-1\n\n\n")
+print("\n\n\nAE-1\n\n\n")
 
 let a_train_import_for_ae_string = fileio.stringFromFile("A_Train", ext:"arff")!
 let a_train_import_for_ae = datasetFromString(a_train_import_for_ae_string)
-let a_ae_train_original = autoencodeDataset(a_train_import_for_ae, true, 0.10)
+let a_ae_train_original = autoencodeDataset(a_train_import_for_ae, denoise: true, denoisePercent: 0.10)
 
 let a_test_import_for_ae_string = fileio.stringFromFile("A_Test", ext:"arff")!
 let a_test_import_for_ae = datasetFromString(a_test_import_for_ae_string)
-let a_ae_test_original = autoencodeDataset(a_test_import_for_ae, false, 0.00)
+let a_ae_test_original = autoencodeDataset(a_test_import_for_ae, denoise: false, denoisePercent: 0.00)
 
-println("\nAE_1-20\n")
+print("\nAE_1-20\n")
 // Create autoencoder
 let ae_1_original_20 = SingleLayerBackpropNet(inputNodes:100, hiddenNodes:20, outputNodes:100)
 
@@ -103,7 +104,7 @@ fileio.writeStringToFile("AE_1-100-20-100", ext:"txt", contents:ae_1_original_20
 
 
 
-println("\nAE_1-50\n")
+print("\nAE_1-50\n")
 // Create autoencoder
 let ae_1_original_50 = SingleLayerBackpropNet(inputNodes:100, hiddenNodes:50, outputNodes:100)
 
@@ -115,7 +116,7 @@ let ae_1_original_50_export_string = networkio.exportWeights(ae_1_original_50, h
 fileio.writeStringToFile("AE_1-100-50-100", ext:"txt", contents:ae_1_original_50_export_string)
 
 
-println("\nAE_1-100\n")
+print("\nAE_1-100\n")
 // Create autoencoder
 let ae_1_original_100 = SingleLayerBackpropNet(inputNodes:100, hiddenNodes:100, outputNodes:100)
 
@@ -128,7 +129,7 @@ fileio.writeStringToFile("AE_1-100-100-100", ext:"txt", contents:ae_1_original_1
 
 
 
-println("\nAE_1-200\n")
+print("\nAE_1-200\n")
 // Create autoencoder
 let ae_1_original_200 = SingleLayerBackpropNet(inputNodes:100, hiddenNodes:200, outputNodes:100)
 
@@ -162,4 +163,4 @@ fileio.writeStringToFile("AE_1-100-200-100", ext:"txt", contents:ae_1_original_2
 //let b_test_export_string = datasetToString(b_test_export)
 //fileio.writeStringToFile("B_Test", ext:"arff", contents:b_test_export_string)
 
-println("derp")
+print("derp")
