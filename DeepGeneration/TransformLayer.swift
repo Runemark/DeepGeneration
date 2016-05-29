@@ -30,7 +30,7 @@ class TransformLayer
         self.firstWeights = Array2D<Float>(rows:inputCount+1, cols:hiddenCount+1, filler:Float(0.0))
         initializeWeights()
         
-        println("initialization complete")
+        print("initialization complete")
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////
@@ -44,9 +44,9 @@ class TransformLayer
         for hiddenIndex in 0..<10
             //        for hiddenIndex in 0..<hiddenCount
         {
-            println("calculating maximal input for hidden node: \(hiddenIndex)")
+            print("calculating maximal input for hidden node: \(hiddenIndex)")
             hiddenNodeInputs.append(maximalInputVectorForHiddenNode(hiddenIndex))
-            println("done!")
+            print("done!")
         }
         
         return hiddenNodeInputs

@@ -16,7 +16,7 @@ struct coord
 
 func imageToFloatGrid(image:Array2D<Bool>) -> Array2D<Float>
 {
-    var floatGrid = Array2D<Float>(rows:10, cols:10, filler:Float(0.0))
+    let floatGrid = Array2D<Float>(rows:10, cols:10, filler:Float(0.0))
     
     for x in 0..<10
     {
@@ -34,7 +34,7 @@ func imageToFloatGrid(image:Array2D<Bool>) -> Array2D<Float>
 
 func circleWithCenter(c:coord, r:Int) -> Array2D<Bool>
 {
-    var circleImage = Array2D<Bool>(rows:10, cols:10, filler:false)
+    let circleImage = Array2D<Bool>(rows:10, cols:10, filler:false)
     
     if (r == 1)
     {
@@ -84,21 +84,21 @@ func circleWithCenter(c:coord, r:Int) -> Array2D<Bool>
 func randomCircle() -> Array2D<Bool>
 {
     // Select a random valid center (WARXING: assuming a 10x10 space, must fall betweeen 1 and 8 inclusive in both x and y direction)
-    let randX = randIntBetween(3, 6)
-    let randY = randIntBetween(3, 6)
+    let randX = randIntBetween(3, stop: 6)
+    let randY = randIntBetween(3, stop: 6)
     let randCenter = coord(x:randX, y:randY)
     
     // Based on the centerpoint, generate the random radius
     let minDist = minDistanceToEdge(randCenter)
-    let randRadius = randIntBetween(1, minDist)
+    let randRadius = randIntBetween(1, stop: minDist)
 
-    return circleWithCenter(randCenter, min(randRadius,3)) // Currently only supports circles of max radius 3
+    return circleWithCenter(randCenter, r: min(randRadius,3)) // Currently only supports circles of max radius 3
 }
 
 func rectWithCorners(nw:coord, sw:coord, se:coord, ne:coord) -> Array2D<Bool>
 {
     // WARXING HARDCODED TO BE A 10X10 IMAGE
-    var squareImage = Array2D<Bool>(rows:10, cols:10, filler:false)
+    let squareImage = Array2D<Bool>(rows:10, cols:10, filler:false)
     
     // Left Side
     for x in nw.x...sw.x
@@ -129,7 +129,7 @@ func rectWithCorners(nw:coord, sw:coord, se:coord, ne:coord) -> Array2D<Bool>
 
 func rectWithCenter(c:coord, h:Int, w:Int) -> Array2D<Bool>
 {
-    return rectWithCorners(coord(x:c.x-h, y:c.y-w), coord(x:c.x+h, y:c.y-w), coord(x:c.x+h, y:c.y+w), coord(x:c.x-h, y:c.y+w))
+    return rectWithCorners(coord(x:c.x-h, y:c.y-w), sw: coord(x:c.x+h, y:c.y-w), se: coord(x:c.x+h, y:c.y+w), ne: coord(x:c.x-h, y:c.y+w))
 }
 
 func minDistanceToEdge(point:coord) -> Int
@@ -146,15 +146,15 @@ func minDistanceToEdge(point:coord) -> Int
 
 func squareWithCenter(c:coord, r:Int) -> Array2D<Bool>
 {
-    return rectWithCenter(c, r, r)
+    return rectWithCenter(c, h: r, w: r)
 }
 
 // Generates a random square with minimum radius of 1
 func randomSquare() -> Array2D<Bool>
 {
     // Select a random valid center (WARXING: assuming a 10x10 space, must fall betweeen 1 and 8 inclusive in both x and y direction)
-    let randX = randIntBetween(3, 6)
-    let randY = randIntBetween(3, 6)
+    let randX = randIntBetween(3, stop: 6)
+    let randY = randIntBetween(3, stop: 6)
     let randCenter = coord(x:randX, y:randY)
     
     // Based on the centerpoint, generate the random radius
@@ -163,9 +163,9 @@ func randomSquare() -> Array2D<Bool>
     {
         minDist = minDist - 1
     }
-    let randRadius = randIntBetween(1, minDist)
+    let randRadius = randIntBetween(1, stop: minDist)
     
-    return squareWithCenter(randCenter, randRadius)
+    return squareWithCenter(randCenter, r: randRadius)
 }
 
 func imageToString(image:Array2D<Bool>) -> String

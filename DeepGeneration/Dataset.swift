@@ -32,7 +32,7 @@ class Dataset<T,R>
     {
         inputs.append(inputVector)
         outputs.append(outputVector)
-        instanceCount++
+        instanceCount += 1
     }
     
     func getInstance(index:Int) -> (features:[T], targets:[R])

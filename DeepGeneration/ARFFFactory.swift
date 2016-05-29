@@ -84,12 +84,11 @@ func autoencodeDataset(dataset:Dataset<Float,Float>, denoise:Bool, denoisePercen
 
 func datasetFromString(dataString:String) -> Dataset<Float,Float>
 {
-    var dataset = Dataset<Float,Float>()
+    let dataset = Dataset<Float,Float>()
     
     var featureCount = 0
     
     // WARXING: ASSUMES ONLY 1 TARGET PER INSTANCE
-    var outputCount = 1
     
     var dataSection = false
     
@@ -104,7 +103,7 @@ func datasetFromString(dataString:String) -> Dataset<Float,Float>
             }
             else
             {
-                featureCount++
+                featureCount += 1
             }
         }
         else if line.rangeOfString("@DATA") != nil
@@ -112,7 +111,7 @@ func datasetFromString(dataString:String) -> Dataset<Float,Float>
             // Data Section Begun
             dataSection = true
         }
-        else if (dataSection && countElements(line) > 0)
+        else if (dataSection && line.characters.count > 0)
         {
             // This is an instance
             var features = [Float]()

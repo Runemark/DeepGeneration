@@ -50,7 +50,7 @@ class SingleLayerBackpropNet
         
         initializeWeights()
             
-        println("initialization complete")
+        print("initialization complete")
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////
@@ -71,7 +71,7 @@ class SingleLayerBackpropNet
             
             if (target == output)
             {
-                correctlyClassifiedInstances++
+                correctlyClassifiedInstances += 1
             }
         }
         
@@ -117,9 +117,9 @@ class SingleLayerBackpropNet
         for hiddenIndex in 0..<10
             //        for hiddenIndex in 0..<hiddenCount
         {
-            println("calculating maximal input for hidden node: \(hiddenIndex)")
+            print("calculating maximal input for hidden node: \(hiddenIndex)")
             hiddenNodeInputs.append(maximalInputVectorForHiddenNode(hiddenIndex))
-            println("done!")
+            print("done!")
         }
         
         return hiddenNodeInputs
@@ -164,7 +164,7 @@ class SingleLayerBackpropNet
             instanceLimit = trainSet.instanceCount
         }
         
-        for epoch in 0..<maxEpochs
+        for _ in 0..<maxEpochs
         {
             for index in 0..<instanceLimit
             {
@@ -192,11 +192,11 @@ class SingleLayerBackpropNet
             
             if (sse)
             {
-                println("epoch \(epoch): \(testSSEOnDataset(testSet))")
+                print("epoch \(epoch): \(testSSEOnDataset(testSet))")
             }
             else
             {
-                println("epoch: \(epoch): \(testACCOnDataset(testSet))")
+                print("epoch: \(epoch): \(testACCOnDataset(testSet))")
             }
             
         }
@@ -220,7 +220,7 @@ class SingleLayerBackpropNet
         }
         
         let result = summedError/Float(testSet.instanceCount)
-        print("GRAND APE: \(result)")
+        print("GRAND APE: \(result)", terminator: "")
         return result
     }
 

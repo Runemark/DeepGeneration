@@ -11,7 +11,7 @@ import Foundation
 // Returns a random bool with 50% probability of getting true, 50% probability of getting false
 func coinFlip() -> Bool
 {
-    let coinFlip = randIntBetween(0, 1)
+    let coinFlip = randIntBetween(0, stop: 1)
     if (coinFlip > 0)
     {
         return true

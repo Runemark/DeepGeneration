@@ -20,21 +20,28 @@ class FileStringIO
     func stringFromFile(fileName:String, ext:String) -> String?
     {
         let directory = "\(root)\(fileName).\(ext)"
-        
-        if let loadedData = String(contentsOfFile:directory, encoding:NSUTF8StringEncoding, error:nil)
-        {
-            return loadedData
+        var loadedData:String
+        do{
+            try loadedData =  String(contentsOfFile:directory, encoding:NSUTF8StringEncoding)
         }
-        else
-        {
+        catch let error as NSError {
+            print(error.localizedDescription)
+            
             return nil
         }
+        
+        return loadedData
+        
+        
     }
     
     func writeStringToFile(fileName:String, ext:String, contents:String)
     {
         let directory = "\(root)\(fileName).\(ext)"
         
-        contents.writeToFile(directory, atomically:false, encoding:NSUTF8StringEncoding, error:nil)
+        do {
+            try contents.writeToFile(directory, atomically:false, encoding:NSUTF8StringEncoding)
+        } catch _ {
+        }
     }
 }
